@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                 when(position){
                     0 -> tab.text = "Movie"
                     1 -> tab.text = "TV"
+                    2 -> tab.text = "Profil"
                 }
             }.attach()
         }
