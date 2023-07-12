@@ -25,25 +25,24 @@
 
     <TextView
         android:id="@+id/movie_title"
-        android:layout_width="230dp"
-        android:layout_height="50dp"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:maxLines="2"
         android:text="movie Title"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/movie_poster"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/movie_overview"
-        android:layout_width="225dp"
+        android:layout_width="175dp"
         android:layout_height="133dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
