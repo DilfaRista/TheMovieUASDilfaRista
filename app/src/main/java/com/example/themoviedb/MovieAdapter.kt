@@ -11,8 +11,9 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 
 
 class MovieAdapter(
-    private val movies : List<Movie>
-) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
+    public val movies: MutableList<Movie>
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
 
     class MovieViewHolder(view : View) : RecyclerView.ViewHolder(view){
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
@@ -46,5 +47,11 @@ class MovieAdapter(
         it.context.startActivity(detailMoviesIntent)
 
     }
+    fun updateMovies(newMovies: List<Movie>) {
+        movies.clear()
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
+    }
+
 }
 

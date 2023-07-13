@@ -28,28 +28,33 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_movies_list.layoutManager = LinearLayoutManager(this.context)
+        rv_movies_list.layoutManager = LinearLayoutManager(requireContext())
         rv_movies_list.setHasFixedSize(true)
-        getMovieData { movies : List<Movie> ->
-            rv_movies_list.adapter = MovieAdapter(movies)
+
+        val movieAdapter = MovieAdapter(movies)
+        rv_movies_list.adapter = movieAdapter
+
+        getMovieData { newMovies ->
+            movieAdapter.updateMovies(newMovies)
         }
-        showRecyclerView()
     }
 
-    private fun getMovieData(callback: (List<Movie>) -> Unit){
+
+
+    private fun getMovieData(callback: (List<Movie>) -> Unit) {
         val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-
+                // Tangani kegagalan permintaan API
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
+                val movieResponse = response.body()
+                val movies = movieResponse?.movies ?: emptyList()
+                callback(movies)
             }
-
         })
     }
-
     private fun showRecyclerView() {
         rv_movies_list.layoutManager = LinearLayoutManager(this.context)
         rv_movies_list.adapter = MovieAdapter(movies)

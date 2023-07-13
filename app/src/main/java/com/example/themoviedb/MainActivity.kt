@@ -3,6 +3,7 @@ package com.example.themoviedb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.themoviedb.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
@@ -16,18 +17,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewPageAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
+        binding.viewPager.adapter = viewPageAdapter
 
-        with(binding){
-            viewPager.adapter = viewPageAdapter
+        val movieFragment = MovieFragment()
+        val tvFragment = TVFragment()
 
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                when(position){
-                    0 -> tab.text = "Movie"
-                    1 -> tab.text = "TV"
-                    2 -> tab.text = "Profil"
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.tab_layout)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_movie -> {
+                    binding.viewPager.currentItem = 0
+                    true
                 }
-            }.attach()
+                R.id.menu_tv -> {
+                    binding.viewPager.currentItem = 1
+                    true
+                }
+                R.id.menu_profile -> {
+                    binding.viewPager.currentItem = 2
+                    true
+                }
+                else -> false
+            }
         }
-
     }
 }
