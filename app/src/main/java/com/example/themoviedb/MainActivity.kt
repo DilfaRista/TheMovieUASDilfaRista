@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
         viewPageAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
         binding.viewPager.adapter = viewPageAdapter
 
-        val movieFragment = MovieFragment()
-        val tvFragment = TVFragment()
-
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.tab_layout)
         bottomNavigationView.setOnItemSelectedListener { item ->
